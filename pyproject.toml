@@ -1,0 +1,30 @@
+[project]
+name = "context-based-hate-moderation"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+authors = [
+    { name = "Nikhath Firdose", email = "nikhath.firdose@sjsu.edu" },
+    { name = "Pranav Tadepu", email = "pranav.tadepu@sjsu.edu"},
+    { name = "Vamshi Raj Nagula", email = "vamshiraj.nagula@sjsu.edu"},
+    { name = "Soumith Reddy Podduturi", email = "soumithreddy.podduturi@sjsu.edu" },
+    { name = "Joshita Atmakuri", email = "joshita.atmakuri@sjsu.edu" },
+]
+dependencies = [
+    "ipykernel>=6.29.5",
+    "matplotlib>=3.9.2",
+    "numpy>=2.1.3",
+    "pandas>=2.2.3",
+    "pre-commit>=4.0.1",
+    "ruff>=0.7.4",
+    "scikit-learn>=1.5.2",
+]
+
+[tool.ruff.lint]
+select = ["F401"]  # Enable unused import check (similar to Flake8's F401)
+ignore = []
+fixable = ["F401"]  # Allow Ruff to autofix unused imports
+
+[tool.setuptools]
+packages = ["src"]

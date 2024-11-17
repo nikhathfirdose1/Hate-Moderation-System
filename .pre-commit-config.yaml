@@ -1,0 +1,19 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff-linter
+        entry: ruff
+        args: [check, --fix]  # Correct usage of --fix with `check`
+        language: system
+        types: [python]
+        always_run: true
+        pass_filenames: false  # Runs on all files in the repo, not just those staged
+
+  - repo: local
+    hooks:
+      - id: add-changes
+        name: "Add Changes"
+        entry: bash -c 'git add -p'
+        language: system
+        types: [python]
