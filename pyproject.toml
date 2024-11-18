@@ -3,7 +3,7 @@ name = "context-based-hate-moderation"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.9"
 authors = [
     { name = "Nikhath Firdose", email = "nikhath.firdose@sjsu.edu" },
     { name = "Pranav Tadepu", email = "pranav.tadepu@sjsu.edu"},
@@ -12,13 +12,17 @@ authors = [
     { name = "Joshita Atmakuri", email = "joshita.atmakuri@sjsu.edu" },
 ]
 dependencies = [
+    "datasets>=3.1.0",
+    "dspy>=2.5.31",
     "ipykernel>=6.29.5",
     "matplotlib>=3.9.2",
-    "numpy>=2.1.3",
+    "numpy>=2.0.2",
     "pandas>=2.2.3",
     "pre-commit>=4.0.1",
     "ruff>=0.7.4",
     "scikit-learn>=1.5.2",
+    "torch>=2.5.1",
+    "transformers>=4.46.2",
 ]
 
 [tool.ruff.lint]

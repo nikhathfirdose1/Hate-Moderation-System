@@ -24,9 +24,12 @@ Hate speech on online platforms is a growing concern. Traditional moderation sys
 To install the project, clone the repository and install the required dependencies:
 
 ```bash
-git clone https://github.com/yourusername/context-based-hate-moderation.git
+# On macOS and Linux.
+curl -LsSf https://astral.sh/uv/install.sh | sh
+git clone https://github.com/sjsu-cmpe257-ml/context-based-hate-moderation.git
 cd context-based-hate-moderation
-pip install -r requirements.txt
+uv venv --python 3.9
+uv sync
 ```
 
 ## Usage
