@@ -2,7 +2,7 @@
 import dspy
 import os
 
-from src.pipeline.models import ContextDeepHateAnalysis, ContextDeepHateWarning
+from src.dspy.models import ContextDeepHateAnalysis, ContextDeepHateWarning
 
 
 def deep_hate_analysis(context: str, comment: str) -> bool:
@@ -25,7 +25,7 @@ def deep_hate_analysis(context: str, comment: str) -> bool:
             context=context,
             comment=comment,
         )
-        return "true" in result.output.lower()
+        return result.output == "True"
 
 
 def deep_hate_warning(context: str, comment: str) -> str:

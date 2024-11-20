@@ -1,10 +1,10 @@
 from dotenv import load_dotenv
-from src.pipeline import perform
+from src.workflow import perform
 
 
 if __name__ == "__main__":
     load_dotenv('local.env')
     
-    context = "In context of immigrants"
-    comment = "Go back Home"
+    context = "Manager to Employee"
+    comment = "You are such a hardworker, taking all these breaks"
     print(perform(context, comment))

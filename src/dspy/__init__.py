@@ -1,5 +1,5 @@
-from src.pipeline.analyse import hate_analysis
-from src.pipeline.recommend import deep_hate_analysis, deep_hate_warning
+from src.dspy.analyse import hate_analysis
+from src.dspy.recommend import deep_hate_analysis, deep_hate_warning
 
 
 def perform(context: str, comment: str) -> str:
