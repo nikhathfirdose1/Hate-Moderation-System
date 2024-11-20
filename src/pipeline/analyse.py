@@ -4,14 +4,14 @@ import os
 from dotenv import load_dotenv
 from typing import List
 
-from pipeline.models import ContextHateAnalysis
+from src.pipeline.models import ContextHateAnalysis
 
 # # Load environment variables
 # load_dotenv('../../local.env')
 
 
 
-def determine_hate(context: List[str], comment: str) -> bool:
+def hate_analysis(context: List[str], comment: str) -> bool:
     load_dotenv('../../local.env')
 
     # Get model name

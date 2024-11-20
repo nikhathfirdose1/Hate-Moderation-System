@@ -1,13 +1,9 @@
 from dotenv import load_dotenv
-from pipeline import perform
+from src.pipeline import perform
 
-
-def main():
-    print("Hello World!")
 
 if __name__ == "__main__":
-    load_dotenv('../local.env')
-    main()
+    load_dotenv('local.env')
     context = [
         "I love the way you are doing this.",
         "I dont know the way you are doing"]

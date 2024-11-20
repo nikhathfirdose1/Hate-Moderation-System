@@ -1,21 +1,17 @@
 from dotenv import load_dotenv
-from pipeline.analyse import determine_hate
-from pipeline.recommend import explain_hate_context
+from src.pipeline.analyse import hate_analysis
+from src.pipeline.recommend import deep_hate_analysis, deep_hate_warning
 
 
-
-def perform(context: str, comment: str)-> bool:
+def perform(context: str, comment: str)-> str:
     load_dotenv('../../local.env')
     
-    if determine_hate(context, comment):
-        print("Hate detected")
-        return explain_hate_context(context, comment)
-    return False
-
-
-if __name__ == "__main__":
-    context = [
-        "I love the way you are doing this.",
-        "I dont know the way you are doing"]
-    comment = "I hate the way you are doing this."
-    print(perform(context, comment))
+    hate = hate_analysis(context, comment)
+    print(hate)
+    if hate:
+        deep_hate = deep_hate_analysis(context=context, comment=comment)
+        print(deep_hate)
+        if deep_hate:
+            deep_warning = deep_hate_warning(context, comment)
+            return deep_warning
+    return None
