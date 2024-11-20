@@ -1,32 +1,26 @@
 # Imports
 import dspy
 import os
-from dotenv import load_dotenv
-from typing import List
 
 from src.pipeline.models import ContextHateAnalysis
 
-# # Load environment variables
-# load_dotenv('../../local.env')
 
+def hate_analysis(context: str, comment: str) -> bool:
+    LLAMA_MODEL_SMALL = os.getenv("LLAMA_MODEL_SMALL", "llama3.2:3b")
+    ollama_model = dspy.OllamaLocal(
+        model=LLAMA_MODEL_SMALL,
+        model_type='text',
+        max_tokens=4000,
+        temperature=0.1,
+        top_p=0.8,
+        frequency_penalty=1.17,
+        top_k=40
+    )
 
-
-def hate_analysis(context: List[str], comment: str) -> bool:
-    load_dotenv('../../local.env')
-
-    # Get model name
-    GROQ_MODEL_SMALL = os.environ['GROQ_MODEL_SMALL']
-    
     # Configure the LLM model
-    with dspy.settings.context(
-        lm=dspy.LM(model=f"groq/{GROQ_MODEL_SMALL}", 
-            max_tokens=8000, 
-            cache=False
-        ),
-        temperature=0,
-    ):
+    with dspy.settings.context(lm=ollama_model):
         result = dspy.ChainOfThought(ContextHateAnalysis, max_retries=3).forward(
-            context="\n> ".join(context),
+            context=context,
             comment=comment,
         )
         return "true" in result.output.lower()

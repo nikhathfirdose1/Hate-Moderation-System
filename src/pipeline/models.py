@@ -34,14 +34,13 @@ class ContextDeepHateAnalysis(dspy.Signature):
     
     Understand the whole context and determine the result.
     
-    Strictly Tell "False" if not hateful. 
-    If hateful, provide the warning message in a format: "The comment is hateful as it is targetting [specific person/group/community] in a [specific way]."
+    Output if the comment is Hateful or not. "True" if hateful, "False" if not hateful.
     """
 
     comment: str = dspy.InputField()
     context: str = dspy.InputField()
     output = dspy.OutputField(
-        desc="""Strictly Tell "False" if not hateful. If hateful, provide the warning message.""",
+        desc="""Strictly Tell "True" if hateful, "False" if not hateful.""",
     )
 
 
