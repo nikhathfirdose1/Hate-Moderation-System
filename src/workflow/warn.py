@@ -12,8 +12,6 @@ def hate_reason(context: str, comment: str) -> str:
             "role": "user",
             "content": ContextDeepHateWarning(context, comment).build_prompt()
         }],
-        options={'temperature': 0.1, 'top_p': 0.8,
-                 'frequency_penalty': 1.17, 'top_k': 40, 'max_tokens': 8000}
     )
     
     return result['message']['content']
