@@ -37,5 +37,5 @@ uv sync
 To use the moderation system, run the following command:
 
 ```bash
-python main.py
+python run_analysis.py
 ```

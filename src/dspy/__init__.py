@@ -2,7 +2,7 @@ from src.dspy.analyse import hate_analysis
 from src.dspy.recommend import deep_hate_analysis, deep_hate_warning
 
 
-def perform(context: str, comment: str) -> str:
+def perform_dspy(context: str, comment: str) -> str:
     hate = hate_analysis(context, comment)
     print(hate)
     if hate:

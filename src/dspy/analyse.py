@@ -1,6 +1,10 @@
 # Imports
+from click import prompt
 import dspy
 import os
+
+from litellm import ollama_models
+import ollama
 
 from src.dspy.models import ContextHateAnalysis
 
@@ -13,7 +17,7 @@ def hate_analysis(context: str, comment: str) -> bool:
     )
 
     # Configure the LLM model
-    with dspy.settings.context(lm=ollama_model):
+    with dspy.settings.context(lm=ollama_models):
         result = dspy.ChainOfThought(ContextHateAnalysis, max_retries=3).forward(
             context=context,
             comment=comment,

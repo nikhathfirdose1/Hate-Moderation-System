@@ -1,22 +1,21 @@
 import pandas as pd
 
 
-# Load the dataset
-file_path = "data/test_dataset_100_100.tsv"  # Replace with your dataset file path
+file_path = "data/test_dataset_100_100.tsv"  
 data = pd.read_csv(file_path, sep='\t')
 
-# Replace 'Hateful' with True and 'NotHateful' with False in the 'Hatefulness' column
+
 data['Hatefulness'] = data['Hatefulness'].map({'Hateful': True, 'NotHateful': False})
 
-# Ensure the column is explicitly cast as boolean
+
 data['Hatefulness'] = data['Hatefulness'].astype(bool)
 
-# Save the updated dataset with True/False
+
 updated_output_file_path = "data/test_dataset_100_100.tsv"
 data.to_csv(updated_output_file_path, sep='\t', index=False)
 print(f"Updated dataset with True/False saved to {updated_output_file_path}.")
 
-# Create a dictionary of contexts based on the comment IDs
+
 context_dict = {
     "erxitcw": "Criticizes double standards in judgment based on gender roles.",
     "ek3e7e4": "Reflects on corruption and dysfunction in administrative systems.",

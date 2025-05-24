@@ -5,7 +5,7 @@ from src.workflow.models import ContextDeepHateAnalysis
 
 
 def deep_analyse_hate(context: str, comment: str) -> bool:
-    LLAMA_MODEL_LARGE = os.getenv("LLAMA_MODEL_LARGE", "llama3.2:3b")
+    LLAMA_MODEL_LARGE = os.getenv("LLAMA_MODEL_LARGE", "llama2:13b")
     result = ollama.chat(
         model=LLAMA_MODEL_LARGE,
         messages=[{

@@ -19,7 +19,7 @@ def deep_hate_analysis(context: str, comment: str) -> bool:
         top_k=40
     )
     
-    # Configure the LLM model
+
     with dspy.settings.context(lm=ollama_model):
         result = dspy.ChainOfThought(ContextDeepHateAnalysis, max_retries=3).forward(
             context=context,

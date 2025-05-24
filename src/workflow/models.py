@@ -10,56 +10,102 @@ class HateAnalysis:
 class ContextHateAnalysis(HateAnalysis):
     def build_prompt(self) -> str:
         prompt = f"""
-        Prompt for the Model:
-        You are an extremely perceptive and context-aware assistant. Your task is to determine whether a comment is hateful or not, based on the given comment and its context. Analyze carefully using the following criteria:
+        You are a quick, sensitive classifier that flags comments that may be hateful, discriminatory, emotionally invalidating, or implicitly hostile **within the given context**.
 
-        Understand the Context: Interpret the comment based on the provided context, as its meaning depends heavily on the situation.
-        Positive Use of Hateful Words: If the comment contains generally hateful words, but they are used positively or neutrally (e.g., "They killed it" in sports), it is not hateful.
-        Non-Hateful Words with Hateful Meaning: If the comment uses neutral words but conveys hate (e.g., "Go back home" in an immigration context), it is hateful.
-        Sarcasm and Irony: Comments that use sarcasm, irony, or subtle mocking to demean or insult are considered hateful.
-        Tone and Implication: Consider the tone and implications of the comment, not just the literal words.
-        After analyzing the comment based on these rules, you must output only one word, either "True" or "False":
+        You are not making a final judgment — just a surface-level flag. Be conservative and cautious. If the comment uses exclusionary language or aggressive tone, flag it.
 
-        Output "True" if the comment is hateful (even slightly).
-        Output "False" if the comment is not hateful.
-        Comment: {self.comment}
-        Context: {self.context}
+        Important: Always flag comments that mention identity, race, nationality, gender, or emotional suppression — even subtly.
 
-        Output: Only the word "True" or "False" — no explanations or reasoning.
+        Return "True" if the comment seems potentially hateful or problematic.
+        Return "False" only if the comment is clearly supportive, neutral, or contextually harmless.
+
+        Examples:
+
+        Context: "Immigration"
+        Comment: "Go back to your country"
+        Output: True
+
+        Context: "Sports"
+        Comment: "They killed it"
+        Output: True
+
+        Context: "Men's emotions debate"
+        Comment: "You shouldn't be crying like this"
+        Output: True
+
+        Context: "Friend consoling another after injury"
+        Comment: "You shouldn't be crying like this"
+        Output: True
+
+        Context: "Encouraging someone"
+        Comment: "You can do better next time"
+        Output: False
+
+        Context: "Gaming chat"
+        Comment: "You suck!"
+        Output: True
+
+        Context: "Academic feedback"
+        Comment: "Your writing needs improvement"
+        Output: False
+
+        Now evaluate:
+
+        Context: "{self.context}"
+        Comment: "{self.comment}"
+
+        Output: Only the word "True" or "False".
         """
         return prompt
+
 
 
 class ContextDeepHateAnalysis(HateAnalysis):
     def build_prompt(self) -> str:
         prompt = f"""
-            Analyze the following comment: '{self.comment}' in the context: '{self.context}' for hate speech. Follow these steps carefully:
+        You are a highly context-aware assistant trained to detect hate speech, emotional harm, and social discrimination. Your job is to evaluate the intent and impact of a comment **in the specific context provided**.
 
-        1. Understand Context:
-        Fully understand the {self.comment}'s intent within its {self.context}. Analyse whether it targets an individual or group based on identity, nationality, race, gender, or other protected characteristics.
-        Determine if the comment promotes exclusion, marginalization, or questions someone's right to belong within the given {self.context}.
+        Follow these rules:
 
-        2. Deeper Analysis:
-        Evaluate whether the language used carries implicit bias, dehumanizing tones, or indirect hostility, even if no explicit slurs are present.
-        Consider specific examples: phrases like "go back home" directed at an immigrant inherently promote exclusion and xenophobia and are considered hate speech.
+        1. Understand the context: Is this a sensitive topic? (e.g., immigration, race, gender, mental health)
+        2. Examine the comment: Is it hostile, demeaning, emotionally suppressive, exclusionary, or mocking?
+        3. If the comment promotes exclusion, prejudice, or harmful stereotypes — it is hateful.
 
-        3. Sarcasm Check:
-        Check if the tone is sarcastic, passive-aggressive, or coded to convey hate while appearing neutral. Pay attention to discriminatory undertones.
-        Assess whether the comment fosters a hostility for a particular group.
+        Key rule: Do NOT overlook hate speech related to **nationality, identity, or race**, even if it uses neutral words.
 
-        4. Results:
-        Output True if:
-        - The comment marginalizes or excludes based on identity, race, or other protected characteristics.
-        - It promotes hate, xenophobia, or hostility in the given context.
-        - The language implicitly or explicitly conveys discrimination or prejudice.
+        Return only one word: "True" or "False"
 
-        Output False if:
-        - The comment is neutral, positive, or contextually harmless.
-        - It does not promote exclusion, hostility, or discrimination.
+        ### Examples:
 
-        Provide only "True" or "False" as the final output based on this analysis.
+        Context: "Immigration"
+        Comment: "Go back to your country"
+        Output: True
+
+        Context: "Sports"
+        Comment: "They killed it"
+        Output: False
+
+        Context: "Debate about men's emotional suppression"
+        Comment: "You shouldn't be crying like this"
+        Output: True
+
+        Context: "Consoling a friend"
+        Comment: "You shouldn't be crying like this"
+        Output: False
+
+        Context: "Casual gaming banter"
+        Comment: "You suck!"
+        Output: False
+
+        ### Now evaluate:
+
+        Context: "{self.context}"
+        Comment: "{self.comment}"
+
+        Output:
         """
         return prompt
+
 
 
 class ContextDeepHateWarning(HateAnalysis):
